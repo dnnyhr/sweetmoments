@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - Sweet Moments by Maritza</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #ff85a2;
+      --secondary-color: #ffb0c1;
+      --accent-color: #ff5c82;
+      --text-color: #333;
+      --light-bg: #f9f9f9;
+      --border-color: #e0e0e0;
+      --success-color: #4CAF50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color);
+      background-color: var(--light-bg);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      padding: 15px 0;
+      position: relative;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    .logout-btn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .logout-btn:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    /* Login Form */
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+    
+    .login-title {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+    
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      text-align: center;
+      font-size: 16px;
+      width: 100%;
+    }
+    
+    .btn:hover {
+      background-color: var(--accent-color);
+    }
+    
+    /* Admin Dashboard */
+    .dashboard {
+      padding: 40px 0;
+    }
+    
+    .dashboard-title {
+      margin-bottom: 30px;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    
+    .add-btn {
+      background-color: var(--success-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .add-btn:hover {
+      opacity: 0.9;
+    }
+    
+    /* Gallery Items */
+    .gallery-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-img-wrapper {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .gallery-info {
+      padding: 15px;
+    }
+    
+    .gallery-title {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+    
+    .gallery-category {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .gallery-description {
+      font-size: 14px;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .gallery-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .edit-btn, .delete-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      color: white;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    
+    .edit-btn {
+      background-color: var(--warning-color);
+    }
+    
+    .delete-btn {
+      background-color: var(--danger-color);
+    }
+    
+    .edit-btn:hover, .delete-btn:hover {
+      opacity: 0.9;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .modal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-size: 20px;
+      color: var(--primary-color);
+    }
+    
+    .modal-close {
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    
+    .preview-image {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    
+    .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    
+    .cancel-btn {
+      background-color: #ccc;
+      color: #333;
+    }
+    
+    .save-btn {
+      background-color: var(--success-color);
+    }
+    
+    /* Alerta */
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .alert.success {
+      background-color: var(--success-color);
+    }
+    
+    .alert.error {
+      background-color: var(--danger-color);
+    }
+    
+    .alert-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    /* Setup */
+    .setup-container {
+      max-width: 500px;
+      margin: 100px auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+    
+    .setup-title {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    /* Loader */
+    .loader-container {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary-color);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .gallery-items {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">Sweet Moments Admin</a>
+        <button id="logout-btn" class="logout-btn" style="display: none;">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Login View -->
+    <div id="login-view" style="display: none;">
+      <div class="container">
+        <div class="login-container">
+          <h2 class="login-title">Iniciar Sesión</h2>
+          <div id="login-alert" style="display: none;"></div>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input type="password" id="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn">Ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Setup View -->
+    <div id="setup-view" style="display: none;">
+      <div class="container">
+        <div class="setup-container">
+          <h2 class="setup-title">Configuración Inicial</h2>
+          <div id="setup-alert" style="display: none;"></div>
+          <form id="setup-form">
+            <div class="form-group">
+              <label for="setup-password">Crear Contraseña de Administrador</label>
+              <input type="password" id="setup-password" class="form-control" required minlength="8">
+              <small>La contraseña debe tener al menos 8 caracteres</small>
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirmar Contraseña</label>
+              <input type="password" id="confirm-password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn">Configurar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-view" style="display: none;">
+      <div class="container">
+        <div class="dashboard">
+          <h2 class="dashboard-title">Panel de Administración</h2>
+          
+          <div id="dashboard-alert" style="display: none;"></div>
+          
+          <div class="actions">
+            <button id="add-image-btn" class="add-btn">
+              <i class="fas fa-plus"></i> Agregar Imagen
+            </button>
+          </div>
+          
+          <div id="gallery-container">
+            <div class="loader-container">
+              <div class="loader"></div>
+            </div>
+            <div class="gallery-items" id="gallery-items"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading View -->
+    <div id="loading-view">
+      <div class="container">
+        <div class="loader-container">
+          <div class="loader"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Image Modal -->
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Agregar Imagen</h3>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="image-form">
+          <input type="hidden" id="image-id">
+          <div class="form-group">
+            <label for="image-src">URL de la Imagen</label>
+            <input type="text" id="image-src" class="form-control" required>
+            <small>Debe ser una ruta relativa al sitio, ejemplo: ./assets/boda1.jpg</small>
+          </div>
+          <div class="form-group">
+            <div id="image-preview-container" style="display: none;">
+              <label>Vista previa:</label>
+              <img src="" id="image-preview" class="preview-image">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="image-title">Título</label>
+              <input type="text" id="image-title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="image-category">Categoría</label>
+              <select id="image-category" class="form-control" required>
+                <option value="">Seleccionar...</option>
+                <option value="bodas">Bodas</option>
+                <option value="arreglos">Arreglos florales</option>
+                <option value="cumpleanos">Cumpleaños</option>
+                <option value="baby-shower">Baby Shower</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image-alt">Texto Alternativo</label>
+            <input type="text" id="image-alt" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="image-description">Descripción</label>
+            <textarea id="image-description" class="form-control" rows="3" required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="image-location">Ubicación</label>
+              <input type="text" id="image-location" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="image-guests">Invitados</label>
+              <input type="text" id="image-guests" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="image-theme">Tema</label>
+              <input type="text" id="image-theme" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="image-date">Fecha</label>
+              <input type="text" id="image-date" class="form-control" required>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn cancel-btn" id="cancel-btn">Cancelar</button>
+        <button class="btn save-btn" id="save-btn">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Variables globales
+    const API_URL = 'https://gallery-manager-worker.sweetmoments.xinocore.com';
+    let token = localStorage.getItem('admin_token');
+    let galleryData = [];
+    
+    // Elementos DOM
+    const loginView = document.getElementById('login-view');
+    const setupView = document.getElementById('setup-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const loadingView = document.getElementById('loading-view');
+    const logoutBtn = document.getElementById('logout-btn');
+    const galleryItemsContainer = document.getElementById('gallery-items');
+    const imageModal = document.getElementById('image-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const imageForm = document.getElementById('image-form');
+    const loginForm = document.getElementById('login-form');
+    const setupForm = document.getElementById('setup-form');
+    
+    // Verificar estado de configuración y autenticación al cargar
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Intentar obtener los datos para verificar si el sistema está configurado
+        const response = await fetch(`${API_URL}/gallery-data.json`);
+        
+        if (response.status === 404) {
+          // Si no existe el archivo, mostrar la vista de configuración
+          showSetupView();
+          return;
+        }
+        
+        // Si estamos autenticados (tenemos token), mostrar el dashboard
+        if (token) {
+          try {
+            // Verificar si el token es válido
+            const verifyResponse = await fetch(`${API_URL}/api/gallery`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            
+            if (verifyResponse.ok) {
+              showDashboardView();
+              loadGalleryData();
+            } else {
+              // Token inválido, mostrar login
+              localStorage.removeItem('admin_token');
+              token = null;
+              showLoginView();
+            }
+          } catch (error) {
+            console.error('Error verificando token:', error);
+            showLoginView();
+          }
+        } else {
+          // No tenemos token, mostrar login
+          showLoginView();
+        }
+      } catch (error) {
+        console.error('Error al inicializar:', error);
+        showSetupView();
+      }
+    });
+    
+    // Función para mostrar vista de configuración
+    function showSetupView() {
+      setupView.style.display = 'block';
+      loginView.style.display = 'none';
+      dashboardView.style.display = 'none';
+      loadingView.style.display = 'none';
+      logoutBtn.style.display = 'none';
+    }
+    
+    // Función para mostrar vista de login
+    function showLoginView() {
+      loginView.style.display = 'block';
+      setupView.style.display = 'none';
+      dashboardView.style.display = 'none';
+      loadingView.style.display = 'none';
+      logoutBtn.style.display = 'none';
+    }
+    
+    // Función para mostrar vista de dashboard
+    function showDashboardView() {
+      dashboardView.style.display = 'block';
+      loginView.style.display = 'none';
+      setupView.style.display = 'none';
+      loadingView.style.display = 'none';
+      logoutBtn.style.display = 'block';
+    }
+    
+    // Función para mostrar alertas
+    function showAlert(container, message, type = 'error') {
+      const alertContainer = document.getElementById(`${container}-alert`);
+      alertContainer.className = `alert ${type}`;
+      alertContainer.innerHTML = `
+        ${message}
+        <button class="alert-close">&times;</button>
+      `;
+      alertContainer.style.display = 'flex';
+      
+      // Configurar evento para cerrar la alerta
+      const closeBtn = alertContainer.querySelector('.alert-close');
+      closeBtn.addEventListener('click', () => {
+        alertContainer.style.display = 'none';
+      });
+      
+      // Cerrar automáticamente después de 5 segundos
+      setTimeout(() => {
+        alertContainer.style.display = 'none';
+      }, 5000);
+    }
+    
+    // Cargar datos de la galería
+async function loadGalleryData() {
+  try {
+    document.querySelector('#gallery-container .loader-container').style.display = 'flex';
+    galleryItemsContainer.innerHTML = '';
+    
+    const response = await fetch(`${API_URL}/gallery-data.json`);
+    const data = await response.json();
+    galleryData = data.images || [];
+    
+    renderGalleryItems();
+  } catch (error) {
+    console.error('Error al cargar datos:', error);
+    showAlert('dashboard', 'Error al cargar los datos de la galería', 'error');
+  } finally {
+    document.querySelector('#gallery-container .loader-container').style.display = 'none';
+  }
+}
+
+// Renderizar elementos de la galería
+function renderGalleryItems() {
+  galleryItemsContainer.innerHTML = '';
+  
+  if (galleryData.length === 0) {
+    galleryItemsContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">No hay imágenes en la galería. Haga clic en "Agregar Imagen" para comenzar.</p>';
+    return;
+  }
+  
+  galleryData.forEach(item => {
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item';
+    galleryItem.innerHTML = `
+      <div class="gallery-img-wrapper">
+        <img src="${item.src}" alt="${item.alt}" class="gallery-img">
+      </div>
+      <div class="gallery-info">
+        <h3 class="gallery-title">${item.title}</h3>
+        <span class="gallery-category">${getCategoryName(item.category)}</span>
+        <p class="gallery-description">${item.description}</p>
+        <div class="gallery-actions">
+          <button class="edit-btn" data-id="${item.id}">
+            <i class="fas fa-edit"></i> Editar
+          </button>
+          <button class="delete-btn" data-id="${item.id}">
+            <i class="fas fa-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    `;
+    
+    galleryItemsContainer.appendChild(galleryItem);
+    
+    // Evento de editar
+    galleryItem.querySelector('.edit-btn').addEventListener('click', () => {
+      openEditModal(item);
+    });
+    
+    // Evento de eliminar
+    galleryItem.querySelector('.delete-btn').addEventListener('click', () => {
+      confirmDelete(item);
+    });
+  });
+}
+
+// Función para obtener el nombre legible de la categoría
+function getCategoryName(category) {
+  const categories = {
+    'bodas': 'Bodas',
+    'arreglos': 'Arreglos florales',
+    'cumpleanos': 'Cumpleaños',
+    'baby-shower': 'Baby Shower'
+  };
+  
+  return categories[category] || category;
+}
+
+// Abrir modal para edición
+function openEditModal(item) {
+  modalTitle.textContent = 'Editar Imagen';
+  fillImageForm(item);
+  toggleModal(true);
+}
+
+// Abrir modal para agregar imagen
+function openAddModal() {
+  modalTitle.textContent = 'Agregar Imagen';
+  resetImageForm();
+  toggleModal(true);
+}
+
+// Llenar formulario con datos de imagen
+function fillImageForm(item) {
+  document.getElementById('image-id').value = item.id;
+  document.getElementById('image-src').value = item.src;
+  document.getElementById('image-title').value = item.title;
+  document.getElementById('image-category').value = item.category;
+  document.getElementById('image-alt').value = item.alt;
+  document.getElementById('image-description').value = item.description;
+  document.getElementById('image-location').value = item.location || '';
+  document.getElementById('image-guests').value = item.guests || '';
+  document.getElementById('image-theme').value = item.theme || '';
+  document.getElementById('image-date').value = item.date || '';
+  
+  // Mostrar vista previa
+  const previewContainer = document.getElementById('image-preview-container');
+  const preview = document.getElementById('image-preview');
+  preview.src = item.src;
+  previewContainer.style.display = 'block';
+}
+
+// Resetear formulario
+function resetImageForm() {
+  imageForm.reset();
+  document.getElementById('image-id').value = '';
+  document.getElementById('image-preview-container').style.display = 'none';
+}
+
+// Mostrar/ocultar modal
+function toggleModal(show) {
+  if (show) {
+    imageModal.classList.add('open');
+  } else {
+    imageModal.classList.remove('open');
+  }
+}
+
+// Confirmar eliminación
+function confirmDelete(item) {
+  if (confirm(`¿Está seguro que desea eliminar la imagen "${item.title}"?`)) {
+    deleteImage(item.id);
+  }
+}
+
+// Eliminar imagen
+async function deleteImage(id) {
+  try {
+    const response = await fetch(`${API_URL}/api/gallery/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    if (response.ok) {
+      showAlert('dashboard', 'Imagen eliminada correctamente', 'success');
+      loadGalleryData();
+    } else {
+      const error = await response.json();
+      showAlert('dashboard', `Error al eliminar: ${error.error}`, 'error');
+    }
+  } catch (error) {
+    console.error('Error al eliminar imagen:', error);
+    showAlert('dashboard', 'Error de conexión al eliminar la imagen', 'error');
+  }
+}
+
+// Guardar imagen (crear o actualizar)
+async function saveImage() {
+  const imageId = document.getElementById('image-id').value;
+  const isEdit = imageId !== '';
+  
+  const imageData = {
+    src: document.getElementById('image-src').value,
+    title: document.getElementById('image-title').value,
+    category: document.getElementById('image-category').value,
+    alt: document.getElementById('image-alt').value,
+    description: document.getElementById('image-description').value,
+    location: document.getElementById('image-location').value,
+    guests: document.getElementById('image-guests').value,
+    theme: document.getElementById('image-theme').value,
+    date: document.getElementById('image-date').value
+  };
+  
+  try {
+    let response;
+    
+    if (isEdit) {
+      // Actualizar imagen existente
+      response = await fetch(`${API_URL}/api/gallery/${imageId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(imageData)
+      });
+    } else {
+      // Crear nueva imagen
+      response = await fetch(`${API_URL}/api/gallery`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(imageData)
+      });
+    }
+    
+    if (response.ok) {
+      toggleModal(false);
+      showAlert('dashboard', `Imagen ${isEdit ? 'actualizada' : 'agregada'} correctamente`, 'success');
+      loadGalleryData();
+    } else {
+      const error = await response.json();
+      showAlert('dashboard', `Error: ${error.error}`, 'error');
+    }
+  } catch (error) {
+    console.error('Error al guardar imagen:', error);
+    showAlert('dashboard', 'Error de conexión al guardar los datos', 'error');
+  }
+}
+
+// Configuración inicial
+async function setupAdmin(e) {
+  e.preventDefault();
+  
+  const password = document.getElementById('setup-password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+  
+  if (password !== confirmPassword) {
+    showAlert('setup', 'Las contraseñas no coinciden', 'error');
+    return;
+  }
+  
+  try {
+    const response = await fetch(`${API_URL}/api/setup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      localStorage.setItem('admin_token', data.token);
+      token = data.token;
+      showAlert('setup', 'Configuración completada correctamente', 'success');
+      
+      setTimeout(() => {
+        showDashboardView();
+        loadGalleryData();
+      }, 2000);
+    } else {
+      showAlert('setup', `Error: ${data.error}`, 'error');
+    }
+  } catch (error) {
+    console.error('Error en configuración:', error);
+    showAlert('setup', 'Error de conexión', 'error');
+  }
+}
+
+// Login
+async function login(e) {
+  e.preventDefault();
+  
+  const password = document.getElementById('password').value;
+  
+  try {
+    const response = await fetch(`${API_URL}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      localStorage.setItem('admin_token', data.token);
+      token = data.token;
+      showDashboardView();
+      loadGalleryData();
+    } else {
+      showAlert('login', 'Contraseña incorrecta', 'error');
+    }
+  } catch (error) {
+    console.error('Error en login:', error);
+    showAlert('login', 'Error de conexión', 'error');
+  }
+}
+
+// Cerrar sesión
+function logout() {
+  localStorage.removeItem('admin_token');
+  token = null;
+  showLoginView();
+}
+
+// Vista previa de imagen
+function previewImage() {
+  const src = document.getElementById('image-src').value;
+  if (src) {
+    const previewContainer = document.getElementById('image-preview-container');
+    const preview = document.getElementById('image-preview');
+    preview.src = src;
+    previewContainer.style.display = 'block';
+  }
+}
+
+// Event Listeners
+document.getElementById('add-image-btn').addEventListener('click', openAddModal);
+document.getElementById('modal-close').addEventListener('click', () => toggleModal(false));
+document.getElementById('cancel-btn').addEventListener('click', () => toggleModal(false));
+document.getElementById('save-btn').addEventListener('click', saveImage);
+document.getElementById('logout-btn').addEventListener('click', logout);
+document.getElementById('image-src').addEventListener('blur', previewImage);
+
+setupForm.addEventListener('submit', setupAdmin);
+loginForm.addEventListener('submit', login);
+
+// Detectar clics para cerrar la modal al hacer clic fuera
+imageModal.addEventListener('click', (e) => {
+  if (e.target === imageModal) {
+    toggleModal(false);
+  }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Color para Android Chrome -->
+  <meta name="theme-color" content="#ff85a2">
+
+  <!-- Para hacer la app en iOS "fullscreen" y definir la barra de estado -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sweet Moments by Maritza | Decoración de Eventos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#inicio" class="logo">
+                    
+                    <div class="logo-text">
+                        <img src="./assets/logo.webp" alt="Sweet Moments by Maritza" style="display: block; width: 100%; height: auto;">
+                    </div>
+                </a>
+                <nav id="nav">
+                    <ul>
+                        <li><a href="#inicio" class="active">Inicio</a></li>
+                        <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#galeria">Galería</a></li>
+                        <li><a href="#precios">Precios</a></li>
+                        <li><a href="#reservaciones">Reservaciones</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+                <div class="burger" id="burger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Hacemos de tu dia un <span>Sweet Moment</span></h1>
+                <p class="hero-text">Especializados en crear detalles hermosos con <span style="color: var(--primary-color);">arreglos florales y decoraciones únicas y personalizadas</span>  para todo tipo de eventos. Desde bodas elegantes hasta alegres fiestas infantiles.</p>
+                <a href="#reservaciones" class="btn hero-btn">Reserva ahora</a>
+            </div>
+        </div>
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="sobre-nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Sweet Moments </h2>
+            </div>
+            <div class="about-content">
+                
+                <div class="about-text">
+                    <h3 style="text-align: center;">Transformamos espacios en experiencias mágicas</h3>
+                    <p>En <strong>Sweet Moments by Maritza</strong>, nos especializamos en convertir cualquier espacio en un escenario de ensueño.</p>
+                    <p></p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <p>Pasión por los detalles</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>Diseños personalizados</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <p>Decoraciones de calidad</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <p>Puntualidad garantizada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <!-- Galería -->
+<section id="galeria">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nuestra Galería</h2>
+        </div>
+        <div class="gallery-filter">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="bodas">Bodas</button>
+            <button class="filter-btn" data-filter="arreglos">Arreglos florales</button>
+        </div>
+        <div class="gallery-items">
+            <!-- Las imágenes se cargarán dinámicamente desde gallery-data.json -->
+            <div class="gallery-loading">
+                <div class="spinner"></div>
+                <p>Cargando imágenes...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="gallery-modal">
+    <div class="modal-content">
+        <div class="modal-close" id="modal-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <img src="/api/placeholder/900/400" alt="" class="modal-img">
+        <div class="modal-info">
+            <h3 class="modal-title">Título del Evento</h3>
+            <span class="modal-category">Categoría</span>
+            <p class="modal-desc">Descripción detallada del evento y la decoración.</p>
+            <div class="modal-details">
+                <!-- Los detalles se cargarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Precios -->
+    <section id="precios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Paquetes</h2>
+            </div>
+            <div class="pricing-container">
+                <div class="pricing-item">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Paquete Básico</h3>
+                        <div class="pricing-price">$XXX<span>USD</span></div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                    </div>
+                    <a href="#reservaciones" class="btn pricing-btn">Reservar Ahora</a>
+                </div>
+                <div class="pricing-item">
+                    <div class="pricing-badge">Popular</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Paquete Premium</h3>
+                        <div class="pricing-price">$XXX <span>USD</span></div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                    </div>
+                    <a href="#reservaciones" class="btn pricing-btn">Reservar Ahora</a>
+                </div>
+                <div class="pricing-item">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Paquete Deluxe</h3>
+                        <div class="pricing-price">$XXX <span>USD</span></div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>XXXX</span>
+                        </div>
+                    </div>
+                    <a href="#reservaciones" class="btn pricing-btn">Reservar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservaciones -->
+    <section id="reservaciones">
+        <div class="container">
+            <div class="section-title">
+                <h2>Reserva tu fecha</h2>
+            </div>
+            <div class="reservation-container">
+                <div class="reservation-form">
+                    <form id="reservation-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" class="form-control" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tipo-evento">Tipo de Evento</label>
+                                <select id="tipo-evento" class="form-control" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="boda">Boda</option>
+                                    <option value="cumpleanos">Cumpleaños</option>
+                                    <option value="baby-shower">Baby Shower</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha-evento">Fecha del Evento</label>
+                                <input type="date" id="fecha-evento" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="paquete">Paquete de Interés</label>
+                            <select id="paquete" class="form-control" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="basico">Paquete Básico</option>
+                                <option value="premium">Paquete Premium</option>
+                                <option value="deluxe">Paquete Deluxe</option>
+                                <option value="personalizado">Personalizado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje o Requerimientos Especiales</label>
+                            <textarea id="mensaje" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Reservación por WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contáctanos</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Ubicación</h4>
+                            <p><a href="https://www.google.com.ar/maps/place/137+Franklin+Ave,+West+Orange,+NJ+07052/@40.7898971,-74.2291737,32m/data=!3m1!1e3!4m6!3m5!1s0x89c3aad7fc527271:0x22e10a221f6d4ed5!8m2!3d40.7899321!4d-74.229167!16s%2Fg%2F11cpm3y7_k?hl=es&entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoASAFQAw%3D%3D"> Franklin Ave, West Orange, NJ 07052, Estados Unidos</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Teléfono</h4>
+                            <p><a href="tel:+1 (862) 216-4544">+1 (862) 216-4544</a></p>
+
+                        </div>
+                        
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>WhatsApp</h4>
+                            <p><a href="https://wa.me/18623358729">+1 (862) 335-8729</a></p>
+
+                        </div>
+                        
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:Maritzalanzas3@gmail.com">Maritzalanzas3@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Horario de Atención</h4>
+                            <p>Lunes a Viernes: 10:00 AM - 7:00 PM<br>Sábados: 10:00 AM - 3:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-social">
+                        <h4>Síguenos</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2218.349183227981!2d-74.2317472897084!3d40.789931971262654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDDCsDQ3JzIzLjgiTiA3NMKwMTMnNDUuMCJX!5e1!3m2!1ses!2sni!4v1745785899950!5m2!1ses!2sni" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-info">
+                    <h3>Sweet Moments by Maritza</h3>
+                    <p>Creando momentos mágicos y memorable para todo tipo de eventos. Convierte tu celebración en algo extraordinario con nuestra decoración personalizada.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#galeria">Galería</a></li>
+                        <li><a href="#precios">Precios</a></li>
+                        <li><a href="#reservaciones">Reservaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#">Bodas</a></li>
+                        <li><a href="#">Cumpleaños</a></li>
+                        <li><a href="#">Baby Showers</a></li>
+                        <li><a href="#">Fiestas Temáticas</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>...</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#inicio" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
