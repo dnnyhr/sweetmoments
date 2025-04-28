@@ -1,0 +1,28 @@
+{
+    "images": [
+      {
+        "id": 1,
+        "src": "./assets/boda1.jpg",
+        "alt": "Boda Elegante",
+        "title": "Boda bonita",
+        "category": "bodas",
+        "description": "Decoración elegante para una boda de ensueño. Combinamos tonos pasteles y arreglos florales delicados para crear un ambiente romántico y sofisticado.",
+        "location": "Salón Principal, Hotel Grand Plaza",
+        "guests": "150 invitados",
+        "theme": "Romántico Clásico",
+        "date": "15 de Marzo, 2025"
+      },
+      {
+        "id": 3,
+        "src": "./assets/boda2.jpg",
+        "alt": "Ceremonia de Boda",
+        "title": "Ceremonia",
+        "category": "bodas",
+        "description": "Montaje para ceremonia al aire libre con arco floral y decoración de pasillo. Perfecto para bodas en jardines o espacios abiertos.",
+        "location": "Villa Rose",
+        "guests": "80 invitados",
+        "theme": "Jardín Botánico",
+        "date": "22 de Abril, 2025"
+      }
+    ]
+  }
