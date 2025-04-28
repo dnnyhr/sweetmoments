@@ -6,16 +6,20 @@ window.addEventListener('load', function() {
         preloader.style.display = 'none';
     }, 500);
     
-    // Cargar la galería desde JSON
-    loadGalleryFromJSON();
+    // Cargar la galería desde el Worker
+    loadGalleryFromWorker();
 });
 
-// Función para cargar la galería desde JSON
-function loadGalleryFromJSON() {
-    fetch('gallery-data.json')
+// URL base del Worker de Cloudflare (actualiza esto con tu dominio real)
+const WORKER_BASE_URL = 'https://sweetmoments.xinocore.com';
+
+// Función para cargar la galería desde el Worker
+function loadGalleryFromWorker() {
+    // Hacemos fetch al endpoint público del worker que devuelve los datos de la galería
+    fetch(`${WORKER_BASE_URL}/gallery-data.json`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('No se pudo cargar el archivo JSON');
+                throw new Error('No se pudo cargar los datos de la galería');
             }
             return response.json();
         })
@@ -34,6 +38,11 @@ function renderGallery(images) {
     const galleryContainer = document.querySelector('.gallery-items');
     galleryContainer.innerHTML = ''; // Limpiar contenedor
     
+    if (!images || images.length === 0) {
+        galleryContainer.innerHTML = '<p class="info-message">No hay imágenes disponibles en este momento.</p>';
+        return;
+    }
+    
     images.forEach(image => {
         const galleryItem = document.createElement('div');
         galleryItem.className = 'gallery-item';
@@ -41,7 +50,7 @@ function renderGallery(images) {
         galleryItem.setAttribute('data-id', image.id);
         
         galleryItem.innerHTML = `
-            <img src="${image.src}" alt="${image.alt}" class="gallery-img">
+            <img src="${image.src}" alt="${image.alt || image.title}" class="gallery-img">
             <div class="gallery-overlay">
                 <h3 class="gallery-title">${image.title}</h3>
                 <span class="gallery-category">${image.category}</span>
@@ -102,37 +111,37 @@ function setupGalleryEvents() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const item = this.closest('.gallery-item');
-            const itemId = item.getAttribute('data-id');
+            const itemId = parseInt(item.getAttribute('data-id'));
             
-            // Buscar la imagen en el JSON
-            fetch('gallery-data.json')
+            // Buscar la imagen en los datos del Worker
+            fetch(`${WORKER_BASE_URL}/gallery-data.json`)
                 .then(response => response.json())
                 .then(data => {
-                    const imageData = data.images.find(img => img.id == itemId);
+                    const imageData = data.images.find(img => img.id === itemId);
                     
                     if (imageData) {
                         modalImg.src = imageData.src;
                         modalTitle.textContent = imageData.title;
                         modalCategory.textContent = imageData.category;
-                        modalDesc.textContent = imageData.description;
+                        modalDesc.textContent = imageData.description || 'Sin descripción disponible';
                         
                         // Actualizar los detalles del modal
                         modalDetails.innerHTML = `
                             <div class="detail-item">
                                 <i class="fas fa-map-marker-alt detail-icon"></i>
-                                <span>${imageData.location}</span>
+                                <span>${imageData.location || 'No especificado'}</span>
                             </div>
                             <div class="detail-item">
                                 <i class="fas fa-users detail-icon"></i>
-                                <span>${imageData.guests}</span>
+                                <span>${imageData.guests || 'No especificado'}</span>
                             </div>
                             <div class="detail-item">
                                 <i class="fas fa-paint-brush detail-icon"></i>
-                                <span>${imageData.theme}</span>
+                                <span>${imageData.theme || 'No especificado'}</span>
                             </div>
                             <div class="detail-item">
                                 <i class="fas fa-calendar-alt detail-icon"></i>
-                                <span>${imageData.date}</span>
+                                <span>${imageData.date || 'No especificado'}</span>
                             </div>
                         `;
                         
