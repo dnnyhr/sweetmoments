@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
 });
 
 // URL base del Worker de Cloudflare (actualiza esto con tu dominio real)
-const WORKER_BASE_URL = 'https://sweetmoments.xinocore.com';
+const WORKER_BASE_URL = 'https://crimson-bar-7cc2.entitydh.workers.dev/';
 
 // Función para cargar la galería desde el Worker
 function loadGalleryFromWorker() {
